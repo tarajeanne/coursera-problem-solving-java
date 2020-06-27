@@ -10,9 +10,7 @@ public class Part2 {
         int count = 0;
         int startIndex = 0;
         while (true) {
-            System.out.println("startIndex " + startIndex);
             int index = stringb.indexOf(stringa, startIndex);
-            System.out.println("index " + index);
             if (index == -1) {
                 break;
             }
@@ -24,5 +22,6 @@ public class Part2 {
     
     void testHowMany() {
         System.out.println(howMany("a", "banana"));
+        System.out.println(howMany("ATG", "zzzzATGzzzzzATGzzzzzzzzATG"));
     }
 }
