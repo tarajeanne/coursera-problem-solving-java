@@ -86,6 +86,17 @@ public class Part1 {
         System.out.println(findGene("ATGzzzzzzzzzzzzzz"));
     }
     
+    int countCTG(String dna) {
+        dna = dna.toUpperCase();
+        int count = 0;
+        int index = dna.indexOf("CTG");
+        while(index != -1) {
+            count ++;
+            index = dna.indexOf("CTG", index + 3);
+        }
+        return count;
+    }
+    
     double cgRatio(String dna) {
         dna = dna.toUpperCase();
         double cCount = 0.0;
@@ -105,7 +116,9 @@ public class Part1 {
         int overNineCount = 0;
         int cgRatioCount = 0;
         int longestLength = 0;
+        int ctgCount = 0;
         for (String gene: sr.data()) {
+            ctgCount += countCTG(gene);
             if(gene.length() > 60) {
                 System.out.println("A gene over 60 characters! " + gene);
                 overNineCount ++;
@@ -122,11 +135,13 @@ public class Part1 {
         System.out.println("There were " + overNineCount + " genes over 60 chars.");
         System.out.println("There were " + cgRatioCount + " genes with a cg ratio > .35");
         System.out.println("The longest gene was " + longestLength + ".");
+        System.out.println("There were " + ctgCount + " CTG codons.");
     }
     
     void testProcessGenes() {
-        FileResource fr = new FileResource("brca1line.fa");
+        FileResource fr = new FileResource("GRch38dnapart.fa");
         String dna = fr.asString();
+        System.out.println(countCTG(dna));
         StorageResource testGenes = getAllGenes(dna.toUpperCase());
         processGenes(testGenes);
     }
